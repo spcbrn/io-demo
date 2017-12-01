@@ -39,11 +39,16 @@ app.post('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log(socket.id + ' connected');
+
   socket.on('message', (body) => {
     console.log('new message: \"' + body + '\"');
+
     socket.broadcast.emit('message', {
       body,
       from: socket.id.slice(8)
     })
+  })
+  socket.on('disconnect', () => {
+    console.log(socket.id + ' disconnected')
   })
 })

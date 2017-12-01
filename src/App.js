@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.socket = io('/')
+    this.socket = io('/');
     this.socket.on('message', (message) => {
       this.setState({
         messages: [message, ...this.state.messages]
@@ -21,10 +21,11 @@ class App extends Component {
 
   handleSubmit = (e) => {
     const body = e.target.value;
+
     if (e.keyCode === 13 && body) {
       const message = {
         body,
-        from: 'me'
+        from: 'spcbrn'
       }
       this.setState({
         messages: [message, ...this.state.messages]
@@ -38,7 +39,7 @@ class App extends Component {
     const messages = this.state.messages.map((msg, i) => {
       const img = msg.img ? <img alt="su" src={msg.img} width="200px"/> : null;
       return (
-        <li key={i}><b>{msg.from}:</b>{msg.body} {img}</li>
+        <li key={i}><b>{msg.from}:</b>{msg.body}{img}</li>
       )
     });
     return (
